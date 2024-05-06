@@ -1,33 +1,53 @@
 from tkinter import*
 import random
 
+# This function is called when a player makes a move on the game board.
 def next_turn(row, column):
 
+    # Accessing the global variable 'player' which stores the current player's symbol.
     global player
 
+    # Checking if the button at the specified row and column is empty and if there is no winner yet.
     if buttons[row][column]['text'] == "" and check_winner() is False:
 
+        # If the current player is the first player:
         if player == players[0]:
 
+            # Set the text of the button at the specified row and column to the current player's symbol.
             buttons[row][column]['text'] = player
 
+            # If there is no winner after this move:
             if check_winner() is False:
+                # Switch to the second player's turn.
                 player = players[1]
+                # Update the label to indicate the second player's turn.
                 label.config(text = (players[1] + " turn"))
+            # If the first player wins:
             elif check_winner() is True:
+                # Update the label to indicate the first player's win.
                 label.config(text = (players[0] + " wins!"))
+            # If it's a tie:
             elif check_winner() == "Tie":
+                # Update the label to indicate a tie.
                 label.config(text = "Tie!")
-        else:
+        else: # If the current player is the second player:
 
+            # Set the text of the button at the specified row and column to the current player's symbol.
             buttons[row][column]['text'] = player
 
+            # If there is no winner after this move:
             if check_winner() is False:
+                # Switch to the first player's turn.
                 player = players[0]
+                # Update the label to indicate the first player's turn.
                 label.config(text = (players[0] + " turn"))
+            # If the second player wins:
             elif check_winner() is True:
+                # Update the label to indicate the second player's win.
                 label.config(text = (players[1] + " wins!"))
+            # If it's a tie:
             elif check_winner() == "Tie":
+                # Update the label to indicate a tie.
                 label.config(text = "Tie!")
     
 def check_winner():
